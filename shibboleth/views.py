@@ -1,4 +1,5 @@
-from django.conf import settings
+from urllib.parse import quote
+
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ImproperlyConfigured
@@ -6,10 +7,9 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
-from urllib.parse import quote
 
 # Logout settings.
-from shibboleth.app_settings import LOGOUT_URL, LOGOUT_REDIRECT_URL
+from shibboleth import settings
 
 
 class ShibbolethView(TemplateView):
@@ -73,9 +73,9 @@ class ShibbolethLogoutView(TemplateView):
         auth.logout(self.request)
         # Get target url in order of preference.
         target = (
-            LOGOUT_REDIRECT_URL
+            settings.LOGOUT_REDIRECT_URL
             or quote(self.request.GET.get(self.redirect_field_name, ""))
             or quote(request.build_absolute_uri())
         )
-        logout = LOGOUT_URL % target
+        logout = settings.LOGOUT_URL % target
         return redirect(logout)
