@@ -16,6 +16,8 @@ sdist
 develop-eggs
 .installed.cfg
 *env*
+node_modules
+*_cache
 
 # Installer logs
 pip-log.txt
@@ -32,3 +34,6 @@ pip-log.txt
 
 # PyCharm
 .idea
+
+#VSC
+.vscode

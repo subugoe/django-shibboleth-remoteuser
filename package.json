@@ -1,0 +1,39 @@
+{
+  "name": "django-shibboleth-remoteuser",
+  "version": "0.12.0",
+  "author": "Brown University Library",
+  "contributors": [
+    "Stefan Hynek <stefan.hynek@uni-goettingen.de> (https://www.sub.uni-goettingen.de/kontakt/personen-a-z/personendetails/person/stefan-hynek/)",
+    "Ubbo Veentjer <veentjer@sub.uni-goettingen.de> (https://www.sub.uni-goettingen.de/kontakt/personen-a-z/personendetails/person/ubbo-veentjer/)"
+  ],
+  "bugs": {
+    "url": "https://gitlab.gwdg.de/discuss-data/django-shibboleth-remoteuser/issues"
+  },
+  "private": true,
+  "devDependencies": {
+    "@semantic-release/gitlab-config": "^6.0.1",
+    "autoprefixer": "^9.4.7",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.0.2",
+    "semantic-release": "^15.13.31"
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/gitlab"
+    ]
+  }
+}
