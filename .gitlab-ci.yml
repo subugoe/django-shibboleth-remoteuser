@@ -1,0 +1,54 @@
+image: python:3.7-alpine
+
+include:
+  - template: Dependency-Scanning.gitlab-ci.yml
+  - template: Code-Quality.gitlab-ci.yml
+  - template: SAST.gitlab-ci.yml
+  - template: License-Management.gitlab-ci.yml
+
+variables:
+  DS_PIP_DEPENDENCY_PATH: requirements.txt
+
+stages:
+  - test
+  - release
+
+tests:
+  stage: test
+  image: python:3.7-alpine
+  before_script:
+    - pip install -r requirements.txt
+  script:
+    - python quicktest.py shibboleth
+  allow_failure: true
+
+code_quality:
+  stage: test
+  artifacts:
+    paths: [gl-code-quality-report.json]
+  except:
+    - master
+
+dependency_scanning:
+  stage: test
+  artifacts:
+    paths: [gl-dependency-scanning-report.json]
+  only:
+    - master
+
+license_management:
+  stage: test
+  variables:
+    LM_PYTHON_VERSION: 3
+  only:
+    - master
+
+
+create_release:
+  image: node:8
+  stage: release
+  script:
+    - npm install
+    - npx semantic-release
+  only:
+    - master
