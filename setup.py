@@ -9,7 +9,6 @@ Still not sure why the templates install with this particular config
 and not with some of the others I tried.
 """
 
-from distutils.core import setup
 from setuptools import setup, find_packages
 from distutils.command.install_data import install_data
 from distutils.command.install import INSTALL_SCHEMES
