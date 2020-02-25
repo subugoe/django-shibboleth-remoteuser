@@ -44,17 +44,14 @@ class ShibbolethRemoteUserBackend(RemoteUserBackend):
         Returns None if ``create_unknown_user`` is ``False`` and a ``User``
         object with the given username is not found in the database.
         """
-
-        # Note that this could be accomplished in one try-except clause, but
-        # instead we use get_or_create when creating unknown users since it has
-        # built-in safeguards for multiple threads.
         if settings.CREATE_UNKNOWN_USER:
             try:
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
                 user = User.objects.create_user(
+                    username,
                     **defaults
-                )  # oder username, **defaults?
+                )
             finally:
                 user = self.handle_created_user(request, user)
         return user
