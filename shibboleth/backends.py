@@ -48,7 +48,7 @@ class ShibbolethRemoteUserBackend(RemoteUserBackend):
             try:
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
-                user = User.objects.create_user(username, **defaults)
+                user = User.objects.create_user(**defaults)
 
             user = self.handle_created_user(request, user)
         else:
