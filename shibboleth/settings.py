@@ -24,7 +24,9 @@ LOGIN_REDIRECT_URL = getattr(settings, "SHIBBOLETH_LOGIN_REDIRECT_URL", None)
 # Optional logout parameters
 # This should look like: https://sso.school.edu/idp/logout.jsp?return=%s
 # The return url variable will be replaced in the LogoutView.
-LOGOUT_URL = getattr(settings, "SHIBBOLETH_LOGOUT_URL", None)
+LOGOUT_URL = getattr(
+    settings, "SHIBBOLETH_LOGOUT_URL", "/Shibboleth.sso/Logout"
+)  # revert default to None
 # LOGOUT_REDIRECT_URL specifies a default logout page that will always be used when
 # users logout from Shibboleth.
 LOGOUT_REDIRECT_URL = getattr(settings, "SHIBBOLETH_LOGOUT_REDIRECT_URL", None)
