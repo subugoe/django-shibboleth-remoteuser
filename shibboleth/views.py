@@ -57,7 +57,7 @@ class ShibbolethLoginView(TemplateView):
             settings.LOGIN_REDIRECT_URL
             or quote(self.request.GET.get(self.redirect_field_name, ""))
             )
-        login = settings.LOGIN_URL % target
+        login = settings.LOGIN_URL + '?target=%s' % target
         return redirect(login)
 
 
@@ -79,5 +79,5 @@ class ShibbolethLogoutView(TemplateView):
             or quote(self.request.GET.get(self.redirect_field_name, ""))
             or quote(request.build_absolute_uri())
         )
-        logout = settings.LOGOUT_URL % target
+        logout = settings.LOGOUT_URL  + '?target=%s' % target
         return redirect(logout)
