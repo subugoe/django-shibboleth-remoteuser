@@ -1,4 +1,4 @@
-image: python:3.7-alpine
+image: python:3.7-slim
 
 include:
   - template: Dependency-Scanning.gitlab-ci.yml
@@ -15,7 +15,7 @@ stages:
 
 tests:
   stage: test
-  image: python:3.7-alpine
+  image: python:3.7-slim
   before_script:
     - pip install -r requirements.txt
   script:
